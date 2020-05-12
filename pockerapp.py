@@ -67,16 +67,20 @@ def Judge(hands, dealer=False):
 	# Evaluation of hand
 	if len(set(suit)) == 1 and rank[1] == rank[0] + 1 and rank[2] == rank[1] + 1:
 		return {'Straight Flash': 6}, max(rank)
+	if len(set(suit)) == 1 and rank[0] == 14 and rank[1] == 2 and rank[2] == 1:
+		return {'Straight Flash': 6}, max(rank)
 	elif len(set(rank)) == 1:
 		return {'Three of a kind!': 5}, max(rank)
 	elif rank[1] == rank[0] + 1 and rank[2] == rank[1] + 1:
+		return {'Straight!': 4}, max(rank)
+	elif rank[0] == 14 and rank[1] == 2 and rank[2] == 1:
 		return {'Straight!': 4}, max(rank)
 	elif len(set(suit)) == 1:
 		return {'Flash!': 3}, max(rank)
 	elif len(set(rank)) == 2:
 		return {'One Pair!': 2}, max(rank)
 	elif max(rank) < 12 and dealer == True:
-		return {'Dealer can\'t play': 0}, max(rank)
+		return {'Less than Queen-high. Dealer can\'t play': 0}, max(rank)
 	elif max(rank):
 		return {'High card!': 1}, max(rank)
 		

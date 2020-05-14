@@ -23,21 +23,24 @@
 ## サンプル
 
 ```ｓh
-$ python3 pokerapp.py Player Hand: ['S3', 'C12', 'C5'] ['High card!']
+$ python3 pokerapp.py 
+Player Hand: ['S3', 'C12', 'C5'] ['High card!']
 Dealer Hand: ['H3', 'S9', 'S4'] ["Dealer can't play"]
 
 Player WIN!
-$ python3 pokerapp.py Player Hand: ['D10', 'C8', 'D7'] ['High card!']
+$ python3 pokerapp.py 
+Player Hand: ['D10', 'C8', 'D7'] ['High card!']
 Dealer Hand: ['D2', 'D14', 'H4'] ['High card!']
 
 Dealer WIN!
-$ python3 pokerapp.py Player Hand: ['S2', 'S8', 'S3'] ['Flash!']
+$ python3 pokerapp.py 
+Player Hand: ['S2', 'S8', 'S3'] ['Flash!']
 Dealer Hand: ['S6', 'C10', 'H12'] ['High card!']
 
 Player WIN!
 ```
 
-### 追加したい機能
+## 追加したい機能
 
 
 * 手札の清書

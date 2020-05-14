@@ -10,7 +10,7 @@ class Deck:
 
 	def build(self):
 		self.value = [x for x in range(2,15)] # Ace is 14
-		self.suit = ['S', 'H', 'D', 'C']
+		self.suit = ['♠', '♡', '♢', '♣']
 
 		for s in self.suit:
 			for v in self.value:
@@ -101,6 +101,21 @@ def Match(p1, p2):
 		else:
 			print('Player WIN!')
 
+def Shaping(hand):
+	h = []
+	for i in hand:
+		if '11' in i:
+			h.append(i.replace('11', 'J'))
+		elif '12' in i:
+			h.append(i.replace('12', 'Q'))
+		elif '13' in i:
+			h.append(i.replace('13', 'K'))
+		elif '14' in i:
+			h.append(i.replace('14', 'A'))
+		else:
+			h.append(i)
+	return h
+
 # main
 def main():
 
@@ -119,9 +134,12 @@ def main():
 	p_role = Handcheck(player).get_role()
 	d_role = Handcheck(dealer, flag=True).get_role()
 
+	p_show = Shaping(player)
+	d_show = Shaping(dealer)
+
 	print("Player Hand: {} {}\nDealer Hand: {} {}\n".format( \
-		player, p_role[0], \
-		dealer, d_role[0] ))
+		p_show, p_role[0], \
+		d_show, d_role[0] ))
 
 	Match(p_hand, d_hand)
 

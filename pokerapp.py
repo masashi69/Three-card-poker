@@ -1,6 +1,4 @@
-
 import random
-
 
 class Deck:
 
@@ -25,7 +23,6 @@ class Deck:
 	def shuffle(self):
 		random.shuffle(self.deck)
 
-
 	def draw(self):
 		return self.deck.pop(0)
 
@@ -46,6 +43,37 @@ class Handcheck:
 	def result(self):
 		return list(self.player[0].values()), self.player[1]
 
+class Payoff:
+
+	# Use "in" to hand return as a list
+
+	def __init__(self, bet, hand):
+		self.bet = bet
+		self.hand = hand
+
+	def anti_bonus(self):
+		if 4 in self.hand:
+			return self.bet * 1
+		elif 5 in self.hand: 
+			return self.bet * 4
+		elif 6 in self.hand:
+			return self.bet * 5
+		else:
+			return 0
+
+	def pairplus_bonus(self):
+		if 2 in self.hand:
+			return self.bet * 1
+		elif 3 in self.hand:
+			return self.bet * 4
+		elif 4 in self.hand:
+			return self.bet * 6
+		elif 5 in self.hand: 
+			return self.bet * 30
+		elif 6 in self.hand: 
+			return self.bet * 40
+		else:
+			return 0
 
 def Handout(card):
 	hand = []
@@ -59,7 +87,7 @@ def Judge(hands, dealer=False):
 
 	# Devide hands into suits and numbers
 	suit = [ hands[0][0] , hands[1][0] , hands[2][0] ]
-	rank = [int(x[1:]) for x in hands]
+	rank = [ int(x[1:]) for x in hands ]
 
 	# Sort of numbers for role evaluation
 	rank.sort()
@@ -88,21 +116,23 @@ def Judge(hands, dealer=False):
 def Match(p1, p2):
 
 	if p1[0] > p2[0]:
-		print('Player WIN!')
+		return 0
 	elif p1[0] < p2[0]:
-		print('Dealer WIN!')
+		return 1
 	# Compare number in case draw rank hand
 	elif p1[0] == p2[0]:
 		if p1[1] > p2[1]:
-			print('Player WIN!')
+			return 0
 		elif p1[1] < p2[1]:
-			print('Dealer WIN!')
+			return 1
 		# Player wins in case of draw
 		else:
-			print('Player WIN!')
+			return 0
 
 def Shaping(hand):
+
 	h = []
+	
 	for i in hand:
 		if '11' in i:
 			h.append(i.replace('11', 'J'))
@@ -117,9 +147,51 @@ def Shaping(hand):
 	return h
 
 # main
-def main():
+def main(chip):
+
+	print('Your chips are {}'.format(chip))
 
 	# Ante
+	while True:
+		i = input('Do you want to bet ante?: [y/n]')
+		if i == 'y':
+			ante = input('How much do you bet?: ')
+			try:
+				ante = int(ante)
+				bet_ante = ante
+
+			except:
+				pass
+
+			break 
+
+		elif i == 'n':
+			bet_ante = 0
+			break 
+
+		else:
+			pass
+
+	# Pair plus
+	while True:
+		i = input('Do you want to bet Pair plus?: [y/n]')
+		if i == 'y':
+			pp = input('How much do you bet?: ')
+			try:
+				pp = int(pp)
+				bet_pairplus =  pp
+
+			except:
+				pass
+
+			break
+
+		elif i == 'n':
+			bet_pairplus = 0
+			break
+
+		else:
+			pass
 
 	# Game start
 	card = Deck()
@@ -137,15 +209,96 @@ def main():
 	p_show = Shaping(player)
 	d_show = Shaping(dealer)
 
-	print("Player Hand: {} {}\nDealer Hand: {} {}\n".format( \
-		p_show, p_role[0], \
-		d_show, d_role[0] ))
-
-	Match(p_hand, d_hand)
+	print("\n===== Open Your Hand =====\n")
+	print("Your Hand: {} {}\n".format( p_show, p_role[0] ))
 
 	# bet, fold
 
+	print('The same chips as Ante is required to match the dealer.')
+	while True:
+
+		if bet_ante == 0 and bet_pairplus == 0:
+			refund_bet = 0
+			refund_ante = 0
+			break
+
+		else:
+
+			i = input('Do you play in your hand?: [y/n]')
+
+			# Open dealer hand
+
+			print("\n===== Open Dealer Hand =====\n")
+			print("Dealer Hand: {} {}\n".format( d_show, d_role[0] ))
+
+			if i == 'y':
+				try:
+					# b = int(b)
+					bet_play = bet_ante
+
+					# Win / Lose Judge
+					
+					match = Match(p_hand, d_hand)
+					if match == 0:
+						print('You WIN!')
+
+						refund_bet = bet_play * 2
+						refund_ante = bet_play * 2
+
+					elif match == 1:
+						print('Dealer WIN!')
+
+						# Forfelt the bet
+						refund_bet = 0
+
+						# Forfelt the ante ig there is no bonus
+						# Make int type with angle brakets to use inequality sign
+						if p_hand[0][0] < 3:
+							refund_ante = 0
+						else:
+							pass
+
+						chip = chip - (bet_play + bet_ante + bet_pairplus)
+
+				except:
+					pass
+
+			elif i == 'n':
+				print('You are fold.')
+
+				# bet confiscation
+				chip = chip - (bet_ante + bet_pairplus)
+
+				refund_bet = 0
+				refund_ante = 0
+
+			break
+
 	# pay off
+	# Win refund
+	all_refund = refund_ante + refund_bet
+
+	# Hand bonus
+	pay_ante = Payoff(bet_ante, p_hand[0]).anti_bonus()
+	pay_pairplus = Payoff(bet_pairplus, p_hand[0]).pairplus_bonus()
+
+	# To reuse the chips for main loop
+	global total
+
+	total = chip + (all_refund + pay_ante + pay_pairplus)
+
+	print('Your chips are {}'.format(total))
 
 if __name__ == '__main__':
-	main()
+
+	# Initial chips
+	chip = 1000
+
+	while True:
+		main(chip)
+		i = input('Continue?: [y/n]')
+		if i == 'y':
+			chip = total
+		else:
+			break
+

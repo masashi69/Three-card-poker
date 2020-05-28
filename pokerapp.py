@@ -94,9 +94,9 @@ def Judge(hands, dealer=False):
 
 	# Evaluation of hand
 	if len(set(suit)) == 1 and rank[1] == rank[0] + 1 and rank[2] == rank[1] + 1:
-		return {'Straight Flash': 6}, max(rank)
+		return {'Straight Flash!': 6}, max(rank)
 	elif len(set(suit)) == 1 and rank[0] == 14 and rank[1] == 2 and rank[2] == 1:
-		return {'Straight Flash': 6}, max(rank)
+		return {'Straight Flash!': 6}, max(rank)
 	elif len(set(rank)) == 1:
 		return {'Three of a kind!': 5}, max(rank)
 	elif rank[1] == rank[0] + 1 and rank[2] == rank[1] + 1:

@@ -41,52 +41,89 @@
 
 ## サンプル
 
-```ｓh
+```sh
 $ python3 pokerapp.py 
-Your chips are 1000
+Your chips are $1000.
 Do you want to bet ante?: [y/n]y
-How much do you bet?: 100
+How much do you bet?: $10
 Do you want to bet Pair plus?: [y/n]y
-How much do you bet?: 100
+How much do you bet?: $10
 
 ===== Open Your Hand =====
 
-Your Hand: ['♡4', '♣Q', '♡A'] ['High card!']
+Your Hand: ['♠9', '♠K', '♠4'] ['Flash!']
 
 The same chips as Ante is required to match the dealer.
 Do you play in your hand?: [y/n]y
 
 ===== Open Dealer Hand =====
 
-Dealer Hand: ['♢5', '♣J', '♡3'] ["Less than Queen-high. Dealer can't play"]
+Dealer Hand: ['♣Q', '♡8', '♠6'] ['High card!']
 
 You WIN!
-Your chips are 1400
+
+===== Pay off =====
+
+Pay off $40 
+Pair plus bonus $40 
+Ante bonus $0 
+
+Your chips are $1080.
 Continue?: [y/n]y
-Your chips are 1400
+Your chips are $1080.
 Do you want to bet ante?: [y/n]y
-How much do you bet?: 100
+How much do you bet?: $100
 Do you want to bet Pair plus?: [y/n]y
-How much do you bet?: 100
+How much do you bet?: $100
 
 ===== Open Your Hand =====
 
-Your Hand: ['♠10', '♡7', '♣7'] ['One Pair!']
+Your Hand: ['♣J', '♡8', '♠7'] ['High card!']
 
 The same chips as Ante is required to match the dealer.
 Do you play in your hand?: [y/n]y
 
 ===== Open Dealer Hand =====
 
-Dealer Hand: ['♣Q', '♠A', '♢7'] ['High card!']
+Dealer Hand: ['♢10', '♣A', '♠9'] ['High card!']
 
-You WIN!
-Your chips are 1900
+Dealer WIN!
+
+===== Pay off =====
+
+Pay off $0 
+Pair plus bonus $0 
+Ante bonus $0 
+
+Your chips are $780.
 Continue?: [y/n]
 ```
 
 ## 追加したい機能
 
-* シミュレータの作成
-* テストコード作成
 * GUI化
+
+## シミュレータ
+
+* 勝負を50万回施行
+* 勝率、役の分布を出力
+
+```sh
+$ python3 simulater.py 
+Three card poker simulator start.
+The simulator trials 500000 times.
+
+=== Probabliry of winning or losing ===
+
+Dealer 249544 wins.
+Player 250456 wins.
+
+=== Percentage of Players hands ===
+
+High card!          74.667%
+One Pair!           16.956%
+Flash!               4.975%
+Straight!            2.977%
+Three of a kind!     0.241%
+Straight Flash!      0.184%
+```

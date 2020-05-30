@@ -94,23 +94,23 @@ def Judge(hands, dealer=False):
 
 	# Evaluation of hand
 	if len(set(suit)) == 1 and rank[1] == rank[0] + 1 and rank[2] == rank[1] + 1:
-		return {'Straight Flash!': 6}, max(rank)
+		return {'Straight Flash!': 6}, rank
 	elif len(set(suit)) == 1 and rank[0] == 14 and rank[1] == 2 and rank[2] == 1:
-		return {'Straight Flash!': 6}, max(rank)
+		return {'Straight Flash!': 6}, rank
 	elif len(set(rank)) == 1:
-		return {'Three of a kind!': 5}, max(rank)
+		return {'Three of a kind!': 5}, rank
 	elif rank[1] == rank[0] + 1 and rank[2] == rank[1] + 1:
-		return {'Straight!': 4}, max(rank)
+		return {'Straight!': 4}, rank
 	elif rank[0] == 14 and rank[1] == 2 and rank[2] == 1:
-		return {'Straight!': 4}, max(rank)
+		return {'Straight!': 4}, rank
 	elif len(set(suit)) == 1:
-		return {'Flash!': 3}, max(rank)
+		return {'Flash!': 3}, rank
 	elif len(set(rank)) == 2:
-		return {'One Pair!': 2}, max(rank)
+		return {'One Pair!': 2}, rank
 	elif max(rank) < 12 and dealer == True:
-		return {'Less than Queen-high. Dealer can\'t play': 0}, max(rank)
+		return {'Less than Queen-high. Dealer can\'t play': 0}, rank
 	elif max(rank):
-		return {'High card!': 1}, max(rank)
+		return {'High card!': 1}, rank
 		
 
 def Match(p1, p2):
@@ -119,12 +119,22 @@ def Match(p1, p2):
 		return 0
 	elif p1[0] < p2[0]:
 		return 1
-	# Compare number in case draw rank hand
+	# Compare number in case draw rank hand high to low
 	elif p1[0] == p2[0]:
-		if p1[1] > p2[1]:
+		if p1[1][2] > p2[1][2]:
 			return 0
-		elif p1[1] < p2[1]:
+		elif p1[1][2] < p2[1][2]:
 			return 1
+		elif p1[1][2] == p2[1][2]:
+			if p1[1][1] > p2[1][1]:
+				return 0
+			elif p1[1][1] < p2[1][1]:
+				return 1
+			elif p1[1][1] == p2[1][2]:
+				if p1[1][0] > p2[1][0]:
+					return 0
+				elif p1[1][0] < p2[1][0]:
+					return 1
 		# Player wins in case of draw
 		else:
 			return 0
@@ -149,13 +159,13 @@ def Shaping(hand):
 # main
 def main(chip):
 
-	print('Your chips are {}'.format(chip))
+	print('Your chips are ${}.'.format(chip))
 
 	# Ante
 	while True:
 		i = input('Do you want to bet ante?: [y/n]')
 		if i == 'y':
-			ante = input('How much do you bet?: ')
+			ante = input('How much do you bet?: $')
 			try:
 				ante = int(ante)
 				bet_ante = ante
@@ -176,7 +186,7 @@ def main(chip):
 	while True:
 		i = input('Do you want to bet Pair plus?: [y/n]')
 		if i == 'y':
-			pp = input('How much do you bet?: ')
+			pp = input('How much do you bet?: $')
 			try:
 				pp = int(pp)
 				bet_pairplus =  pp
@@ -239,7 +249,14 @@ def main(chip):
 					# Win / Lose Judge
 					
 					match = Match(p_hand, d_hand)
-					if match == 0:
+					# If the dealer folds, only ante will be refunded
+					if match == 0 and d_hand[0][0] == 0:
+						print('You WIN!')
+
+						refund_bet = bet_play * 1
+						refund_ante = bet_play * 2
+
+					elif match == 0:
 						print('You WIN!')
 
 						refund_bet = bet_play * 2
@@ -287,7 +304,14 @@ def main(chip):
 
 	total = chip + (all_refund + pay_ante + pay_pairplus)
 
-	print('Your chips are {}'.format(total))
+	# For shape strings
+	payoff_print =  'Pay off ${} \n' \
+					'Pair plus bonus ${} \n' \
+					'Ante bonus ${}'.format(all_refund, pay_pairplus, pay_ante)
+
+	print('\n===== Pay off =====\n')
+	print(payoff_print, '\n')
+	print('Your chips are ${}.'.format(total))
 
 if __name__ == '__main__':
 
@@ -299,6 +323,8 @@ if __name__ == '__main__':
 		i = input('Continue?: [y/n]')
 		if i == 'y':
 			chip = total
-		else:
+		elif i == 'n':
 			break
+		else:
+			pass
 

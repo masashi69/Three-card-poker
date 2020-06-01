@@ -268,9 +268,9 @@ def main(chip):
 						# Forfelt the bet
 						refund_bet = 0
 
-						# Forfelt the ante ig there is no bonus
+						# Forfelt the ante if there is no bonus
 						# Make int type with angle brakets to use inequality sign
-						if p_hand[0][0] < 3:
+						if p_hand[0][0] < 4:
 							refund_ante = 0
 						else:
 							pass

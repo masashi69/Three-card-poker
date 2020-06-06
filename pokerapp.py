@@ -265,15 +265,9 @@ def main(chip):
 					elif match == 1:
 						print('Dealer WIN!')
 
-						# Forfelt the bet
+						# Forfelt the bet and ante
 						refund_bet = 0
-
-						# Forfelt the ante if there is no bonus
-						# Make int type with angle brakets to use inequality sign
-						if p_hand[0][0] < 4:
-							refund_ante = 0
-						else:
-							pass
+						refund_ante = 0
 
 						chip = chip - (bet_play + bet_ante + bet_pairplus)
 
@@ -281,13 +275,15 @@ def main(chip):
 					pass
 
 			elif i == 'n':
-				print('You are fold.')
+				print('You folded.')
 
 				# bet confiscation
 				chip = chip - (bet_ante + bet_pairplus)
 
 				refund_bet = 0
 				refund_ante = 0
+				bet_ante = 0
+				bet_pairplus = 0
 
 			break
 

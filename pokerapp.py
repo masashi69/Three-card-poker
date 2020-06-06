@@ -115,7 +115,10 @@ def Judge(hands, dealer=False):
 
 def Match(p1, p2):
 
-	if p1[0] > p2[0]:
+	# In case of draw hands
+	if p1 == p2:
+		return 2
+	elif p1[0] > p2[0]:
 		return 0
 	elif p1[0] < p2[0]:
 		return 1
@@ -135,9 +138,7 @@ def Match(p1, p2):
 					return 0
 				elif p1[1][0] < p2[1][0]:
 					return 1
-		# Player wins in case of draw
-		else:
-			return 0
+
 
 def Shaping(hand):
 
@@ -270,6 +271,14 @@ def main(chip):
 						refund_ante = 0
 
 						chip = chip - (bet_play + bet_ante + bet_pairplus)
+
+					elif match == 2:
+						print('Draw!')
+
+						refund_bet = 0
+						refund_ante = 0
+						bet_ante = 0
+						bet_pairplus = 0
 
 				except:
 					pass

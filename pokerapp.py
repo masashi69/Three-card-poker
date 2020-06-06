@@ -51,7 +51,7 @@ class Payoff:
 		self.bet = bet
 		self.hand = hand
 
-	def anti_bonus(self):
+	def ante_bonus(self):
 		if 4 in self.hand:
 			return self.bet * 1
 		elif 5 in self.hand: 
@@ -292,7 +292,7 @@ def main(chip):
 	all_refund = refund_ante + refund_bet
 
 	# Hand bonus
-	pay_ante = Payoff(bet_ante, p_hand[0]).anti_bonus()
+	pay_ante = Payoff(bet_ante, p_hand[0]).ante_bonus()
 	pay_pairplus = Payoff(bet_pairplus, p_hand[0]).pairplus_bonus()
 
 	# To reuse the chips for main loop

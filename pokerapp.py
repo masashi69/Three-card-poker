@@ -63,15 +63,15 @@ class Payoff:
 
 	def pairplus_bonus(self):
 		if 2 in self.hand:
-			return self.bet * 1
+			return self.bet * 1 + self.bet
 		elif 3 in self.hand:
-			return self.bet * 4
+			return self.bet * 4 + self.bet
 		elif 4 in self.hand:
-			return self.bet * 6
+			return self.bet * 6 + self.bet
 		elif 5 in self.hand: 
-			return self.bet * 30
+			return self.bet * 30 + self.bet
 		elif 6 in self.hand: 
-			return self.bet * 40
+			return self.bet * 40 + self.bet
 		else:
 			return 0
 
@@ -133,7 +133,7 @@ def Match(p1, p2):
 				return 0
 			elif p1[1][1] < p2[1][1]:
 				return 1
-			elif p1[1][1] == p2[1][2]:
+			elif p1[1][1] == p2[1][1]:
 				if p1[1][0] > p2[1][0]:
 					return 0
 				elif p1[1][0] < p2[1][0]:

@@ -5,31 +5,54 @@ match_list = []
 hand_list = []
 win_list = []
 
-trial = 1000000
+trial = 100
 
-def Trials():
+ante = 10
+pp = 10
+
+def Trials(chips):
 	for _ in range(trial):
 
-	    deck = pokerapp.Deck()
-	    deck.shuffle()
+		deck = pokerapp.Deck()
+		deck.shuffle()
 
-	    player = pokerapp.Handout(deck)
-	    dealer = pokerapp.Handout(deck)
+		player = pokerapp.Handout(deck)
+		dealer = pokerapp.Handout(deck)
 
-	    match_result = pokerapp.Match(player, dealer)
-	    hand_result = pokerapp.Handcheck(player).get_role()[0][0]
+		hand_result = pokerapp.Handcheck(player).get_role()[0][0]
+		player_hand = pokerapp.Handcheck(player).result()
+		dealer_hand = pokerapp.Handcheck(dealer, flag=True).result()
 
-	    if match_result == 0:
-		    win_list.append(hand_result)
-	    
-	    match_list.append(match_result)
-	    hand_list.append(hand_result)
+		match_result = pokerapp.Match(player_hand, dealer_hand)
+
+		# bonus
+		ante_b = pokerapp.Payoff(ante, player_hand[0]).ante_bonus()
+		pp_b = pokerapp.Payoff(pp, player_hand[0]).pairplus_bonus()
+
+		if match_result == 0:
+			win_list.append(hand_result)
+		elif match_result == 2:
+			ante_b = 0
+			pp_b = 0
+		
+		match_list.append(match_result)
+		hand_list.append(hand_result)
+
+		# pay off
+		pays = Liquidation(match_result, dealer_hand, ante, pp)
+
+		chips = chips + pays + ante_b + pp_b
+
+		# For debug
+		print(hand_result, match_result, chips, pays, ante_b, pp_b)
+
+	return chips
 
 def Wins():
 	w = collections.Counter(match_list)
-	print('Player {} wins.'.format(w[0]))
-	print('Dealer {} wins.'.format(w[1]))
-	print('Draw {} times.'.format(w[2]))
+	print('Player {} wins. ({:.1%})'.format(w[0], w[0] / trial))
+	print('Dealer {} wins. ({:.1%})'.format(w[1], w[1] / trial))
+	print('Draw {} times. ({:.1%})'.format(w[2], w[2] / trial))
 
 	return w[0]
 
@@ -48,12 +71,42 @@ def Hands(lists, times):
 
 		print(shaped_hand, shaped_propotion)
 
+def Liquidation(match, d_hand, ante, bet):
+	if match == 0 and d_hand[0][0] == 0:
+		refund_bet = bet * 1
+		refund_ante = ante * 2
+		return refund_bet + refund_ante
+
+	elif match == 0:
+		refund_bet = ante * 2
+		refund_ante = bet * 2
+		return refund_bet + refund_ante
+
+	elif match == 1:
+		# Forfelt the bet
+		refund_bet = 0
+		refund_ante = 0
+		# Convert negative
+		return -((bet * 2) + ante)
+
+	elif match == 2:
+		return 0
+
+
+def Save_details(text):
+	with open('details.txt', 'w') as f:
+		f.write(text)
+
 def main():
 
+	chip = 1000
+
+	print('You are first given $1,000.')
 	print('Three card poker simulator start.')
 	print('The simulator trials {:,} times.'.format(trial))
+	print('You\'ll bet ante ${} and pair plus ${} all the time.'.format(ante, pp))
 
-	Trials()
+	T = Trials(chip)
 
 	print('\n=== Probabliry of winning or losing ===\n')
 
@@ -67,6 +120,8 @@ def main():
 	
 	Hands(win_list, W)
 
+	print()
+	print('You finally got ${}'.format(T))
 
 if __name__ == '__main__':
 	main()

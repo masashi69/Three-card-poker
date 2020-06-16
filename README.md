@@ -105,25 +105,41 @@ Continue?: [y/n]
 
 ## シミュレータ
 
-* 勝負を50万回施行
+* 勝負をtrialの回数施行
 * 勝率、役の分布を出力
+* アンティ、ペアプラスの賭け金をシミュレート
+  - プレイヤーはfoldしない
 
 ```sh
 $ python3 simulater.py 
+You are first given $1,000.
 Three card poker simulator start.
-The simulator trials 500000 times.
+The simulator trials 500,000 times.
+You\'ll bet ante $10 and pair plus $10 all the time.
 
 === Probabliry of winning or losing ===
 
-Dealer 249544 wins.
-Player 250456 wins.
+Player 271219 wins. (54.2%)
+Dealer 228442 wins. (45.7%)
+Draw 339 times. (0.1%)
 
-=== Percentage of Players hands ===
+=== Percentage of Players all hands ===
 
-High card!          74.667%
-One Pair!           16.956%
-Flash!               4.975%
-Straight!            2.977%
-Three of a kind!     0.241%
-Straight Flash!      0.184%
+High card!          74.717%
+One Pair!           16.891%
+Flash!                4.99%
+Straight!            2.967%
+Three of a kind!     0.236%
+Straight Flash!        0.2%
+
+=== Percentage of Players win(271,219 times) hands ===
+
+High card!          59.334%
+One Pair!           25.857%
+Flash!                8.66%
+Straight!            5.348%
+Three of a kind!     0.434%
+Straight Flash!      0.368%
+
+You finally got $7469850
 ```

@@ -157,6 +157,15 @@ def Shaping(hand):
 			h.append(i)
 	return h
 
+def Inputbet():
+	while True:
+		b = input('How much do you bet?: $')
+		if b.isnumeric():
+			return b
+			break
+		else:
+			print('Please enter a number.') 
+
 # main
 def main(chip):
 
@@ -166,7 +175,7 @@ def main(chip):
 	while True:
 		i = input('Do you want to bet ante?: [y/n]')
 		if i == 'y':
-			ante = input('How much do you bet?: $')
+			ante = Inputbet()
 			try:
 				ante = int(ante)
 				bet_ante = ante
@@ -187,7 +196,7 @@ def main(chip):
 	while True:
 		i = input('Do you want to bet Pair plus?: [y/n]')
 		if i == 'y':
-			pp = input('How much do you bet?: $')
+			pp = Inputbet()
 			try:
 				pp = int(pp)
 				bet_pairplus =  pp

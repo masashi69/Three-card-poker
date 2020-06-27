@@ -166,6 +166,27 @@ def Inputbet():
 		else:
 			print('Please enter a number.') 
 
+def Liquidation(match, d_hand, ante, bet):
+	if match == 0 and d_hand[0][0] == 0:
+		refund_bet = bet * 1
+		refund_ante = ante * 2
+		return refund_bet + refund_ante
+
+	elif match == 0:
+		refund_bet = ante * 2
+		refund_ante = bet * 2
+		return refund_bet + refund_ante
+
+	elif match == 1:
+		# Forfelt the bet
+		refund_bet = 0
+		refund_ante = 0
+		# Convert negative
+		return -((bet * 2) + ante)
+
+	elif match == 2:
+		return 0
+
 # main
 def main(chip):
 
@@ -260,34 +281,17 @@ def main(chip):
 					
 					match = Match(p_hand, d_hand)
 					# If the dealer folds, only ante will be refunded
-					if match == 0 and d_hand[0][0] == 0:
+					all_refund = Liquidation(match, d_hand, bet_ante, bet_play)
+
+					# Print winner
+					if match == 0:
 						print('You WIN!')
-
-						refund_bet = bet_play * 1
-						refund_ante = bet_play * 2
-
-					elif match == 0:
-						print('You WIN!')
-
-						refund_bet = bet_play * 2
-						refund_ante = bet_play * 2
 
 					elif match == 1:
 						print('Dealer WIN!')
 
-						# Forfelt the bet and ante
-						refund_bet = 0
-						refund_ante = 0
-
-						chip = chip - (bet_play + bet_ante + bet_pairplus)
-
 					elif match == 2:
 						print('Draw!')
-
-						refund_bet = 0
-						refund_ante = 0
-						bet_ante = 0
-						bet_pairplus = 0
 
 				except:
 					pass
@@ -306,9 +310,6 @@ def main(chip):
 			break
 
 	# pay off
-	# Win refund
-	all_refund = refund_ante + refund_bet
-
 	# Hand bonus
 	pay_ante = Payoff(bet_ante, p_hand[0]).ante_bonus()
 	pay_pairplus = Payoff(bet_pairplus, p_hand[0]).pairplus_bonus()

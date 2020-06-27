@@ -40,7 +40,7 @@ def Trials(chips):
 		hand_list.append(hand_result)
 
 		# pay off
-		pays = Liquidation(match_result, dealer_hand, ante, bet_chip)
+		pays = pokerapp.Liquidation(match_result, dealer_hand, ante, bet_chip)
 
 		chips = chips + pays + ante_b + pp_b
 
@@ -71,27 +71,6 @@ def Hands(lists, times):
 		shaped_propotion = (p + '%').rjust(10)
 
 		print(shaped_hand, shaped_propotion)
-
-def Liquidation(match, d_hand, ante, bet):
-	if match == 0 and d_hand[0][0] == 0:
-		refund_bet = bet * 1
-		refund_ante = ante * 2
-		return refund_bet + refund_ante
-
-	elif match == 0:
-		refund_bet = ante * 2
-		refund_ante = bet * 2
-		return refund_bet + refund_ante
-
-	elif match == 1:
-		# Forfelt the bet
-		refund_bet = 0
-		refund_ante = 0
-		# Convert negative
-		return -((bet * 2) + ante)
-
-	elif match == 2:
-		return 0
 
 
 def Save_details(text):

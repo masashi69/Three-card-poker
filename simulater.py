@@ -8,6 +8,7 @@ win_list = []
 trial = 100
 
 ante = 10
+bet_chip = 10
 pp = 10
 
 def Trials(chips):
@@ -39,12 +40,12 @@ def Trials(chips):
 		hand_list.append(hand_result)
 
 		# pay off
-		pays = Liquidation(match_result, dealer_hand, ante, pp)
+		pays = Liquidation(match_result, dealer_hand, ante, bet_chip)
 
 		chips = chips + pays + ante_b + pp_b
 
 		# For debug
-		print(hand_result, match_result, chips, pays, ante_b, pp_b)
+		#print(hand_result, match_result, chips, pays, ante_b, pp_b)
 
 	return chips
 
@@ -101,7 +102,7 @@ def main():
 
 	chip = 1000
 
-	print('You are first given $1,000.')
+	print('You are first given ${:,}.'.format(chip))
 	print('Three card poker simulator start.')
 	print('The simulator trials {:,} times.'.format(trial))
 	print('You\'ll bet ante ${} and pair plus ${} all the time.'.format(ante, pp))
@@ -121,7 +122,7 @@ def main():
 	Hands(win_list, W)
 
 	print()
-	print('You finally got ${}'.format(T))
+	print('You finally got ${:,}'.format(T))
 
 if __name__ == '__main__':
 	main()

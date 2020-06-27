@@ -39,6 +39,9 @@ def Trials(chips):
 		match_list.append(match_result)
 		hand_list.append(hand_result)
 
+		# Reduce bet chips
+		chips = chips - (ante + bet_chip + pp)
+
 		# pay off
 		pays = pokerapp.Liquidation(match_result, dealer_hand, ante, bet_chip)
 

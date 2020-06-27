@@ -314,6 +314,9 @@ def main(chip):
 	pay_ante = Payoff(bet_ante, p_hand[0]).ante_bonus()
 	pay_pairplus = Payoff(bet_pairplus, p_hand[0]).pairplus_bonus()
 
+	# Reduce bet chips
+	chip = chip - (bet_ante + bet_play + bet_pairplus)
+
 	# To reuse the chips for main loop
 	global total
 

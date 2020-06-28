@@ -51,51 +51,78 @@ How much do you bet?: $10
 
 ===== Open Your Hand =====
 
-Your Hand: ['♠9', '♠K', '♠4'] ['Flash!']
+Your Hand: ['♠4', '♠9', '♠K'] ['Flash!']
 
 The same chips as Ante is required to match the dealer.
 Do you play in your hand?: [y/n]y
 
 ===== Open Dealer Hand =====
 
-Dealer Hand: ['♣Q', '♡8', '♠6'] ['High card!']
+Dealer Hand: ['♡2', '♣9', '♡4'] ["Less than Queen-high. Dealer can't play"]
+
+You WIN!
+
+===== Pay off =====
+
+Pay off $30 
+Pair plus bonus $50 
+Ante bonus $0 
+
+Your chips are $1050.
+Continue?: [y/n]y
+Your chips are $1050.
+Do you want to bet ante?: [y/n]y
+How much do you bet?: $10
+Do you want to bet Pair plus?: [y/n]y
+How much do you bet?: $10
+
+===== Open Your Hand =====
+
+Your Hand: ['♠7', '♣K', '♣3'] ['High card!']
+
+The same chips as Ante is required to match the dealer.
+Do you play in your hand?: [y/n]y
+
+===== Open Dealer Hand =====
+
+Dealer Hand: ['♠Q', '♡4', '♣5'] ['High card!']
 
 You WIN!
 
 ===== Pay off =====
 
 Pay off $40 
-Pair plus bonus $40 
+Pair plus bonus $0 
 Ante bonus $0 
 
-Your chips are $1080.
+Your chips are $1060.
 Continue?: [y/n]y
-Your chips are $1080.
+Your chips are $1060.
 Do you want to bet ante?: [y/n]y
-How much do you bet?: $100
+How much do you bet?: $10
 Do you want to bet Pair plus?: [y/n]y
-How much do you bet?: $100
+How much do you bet?: $10
 
 ===== Open Your Hand =====
 
-Your Hand: ['♣J', '♡8', '♠7'] ['High card!']
+Your Hand: ['♡9', '♢2', '♢3'] ['High card!']
 
 The same chips as Ante is required to match the dealer.
 Do you play in your hand?: [y/n]y
 
 ===== Open Dealer Hand =====
 
-Dealer Hand: ['♢10', '♣A', '♠9'] ['High card!']
+Dealer Hand: ['♢10', '♣2', '♢7'] ["Less than Queen-high. Dealer can't play"]
 
-Dealer WIN!
+You WIN!
 
 ===== Pay off =====
 
-Pay off $0 
+Pay off $30 
 Pair plus bonus $0 
 Ante bonus $0 
 
-Your chips are $780.
+Your chips are $1060.
 Continue?: [y/n]
 ```
 
@@ -114,32 +141,28 @@ Continue?: [y/n]
 $ python3 simulater.py 
 You are first given $1,000.
 Three card poker simulator start.
-The simulator trials 500,000 times.
+The simulator trials 100 times.
 You\'ll bet ante $10 and pair plus $10 all the time.
 
 === Probabliry of winning or losing ===
 
-Player 271219 wins. (54.2%)
-Dealer 228442 wins. (45.7%)
-Draw 339 times. (0.1%)
+Player 54 wins. (54.0%)
+Dealer 46 wins. (46.0%)
+Draw 0 times. (0.0%)
 
 === Percentage of Players all hands ===
 
-High card!          74.717%
-One Pair!           16.891%
-Flash!                4.99%
-Straight!            2.967%
-Three of a kind!     0.236%
-Straight Flash!        0.2%
+High card!            75.0%
+One Pair!             12.0%
+Flash!                 7.0%
+Straight!              6.0%
 
-=== Percentage of Players win(271,219 times) hands ===
+=== Percentage of Players win(54 times) hands ===
 
-High card!          59.334%
-One Pair!           25.857%
-Flash!                8.66%
-Straight!            5.348%
-Three of a kind!     0.434%
-Straight Flash!      0.368%
+High card!          61.111%
+One Pair!           16.667%
+Flash!              11.111%
+Straight!           11.111%
 
-You finally got $7469850
+You finally got $-470
 ```

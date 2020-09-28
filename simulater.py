@@ -5,50 +5,53 @@ match_list = []
 hand_list = []
 win_list = []
 
-trial = 100
+trial = 1000
 
 ante = 10
-bet_chip = 10
+bet_chip = ante
 pp = 10
 
 def Trials(chips):
 	for _ in range(trial):
 
-		deck = pokerapp.Deck()
-		deck.shuffle()
+		# Cannot bet more than chips
+		# Double the amount considering the amount of betting and reducing
+		if chips >= (ante + pp + bet_chip) * 2 :
+			deck = pokerapp.Deck()
+			deck.shuffle()
 
-		player = pokerapp.Handout(deck)
-		dealer = pokerapp.Handout(deck)
+			player = pokerapp.Handout(deck)
+			dealer = pokerapp.Handout(deck)
 
-		hand_result = pokerapp.Handcheck(player).get_role()[0][0]
-		player_hand = pokerapp.Handcheck(player).result()
-		dealer_hand = pokerapp.Handcheck(dealer, flag=True).result()
+			hand_result = pokerapp.Handcheck(player).get_role()[0][0]
+			player_hand = pokerapp.Handcheck(player).result()
+			dealer_hand = pokerapp.Handcheck(dealer, flag=True).result()
 
-		match_result = pokerapp.Match(player_hand, dealer_hand)
+			match_result = pokerapp.Match(player_hand, dealer_hand)
 
-		# bonus
-		ante_b = pokerapp.Payoff(ante, player_hand[0]).ante_bonus()
-		pp_b = pokerapp.Payoff(pp, player_hand[0]).pairplus_bonus()
+			# bonus
+			ante_b = pokerapp.Payoff(ante, player_hand[0]).ante_bonus()
+			pp_b = pokerapp.Payoff(pp, player_hand[0]).pairplus_bonus()
 
-		if match_result == 0:
-			win_list.append(hand_result)
-		elif match_result == 2:
-			ante_b = 0
-			pp_b = 0
+			if match_result == 0:
+				win_list.append(hand_result)
+			elif match_result == 2:
+				ante_b = 0
+				pp_b = 0
 		
-		match_list.append(match_result)
-		hand_list.append(hand_result)
+			match_list.append(match_result)
+			hand_list.append(hand_result)
 
-		# Reduce bet chips
-		chips = chips - (ante + bet_chip + pp)
+			# Reduce bet chips
+			chips = chips - (ante + bet_chip + pp)
 
-		# pay off
-		pays = pokerapp.Liquidation(match_result, dealer_hand, ante, bet_chip)
+			# pay off
+			pays = pokerapp.Liquidation(match_result, dealer_hand, ante, bet_chip)
 
-		chips = chips + pays + ante_b + pp_b
+			chips = chips + pays + ante_b + pp_b
 
-		# For debug
-		#print(hand_result, match_result, chips, pays, ante_b, pp_b)
+			# For debug
+			#print(hand_result, match_result, chips, pays, ante_b, pp_b)
 
 	return chips
 

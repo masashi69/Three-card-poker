@@ -12,7 +12,7 @@ bet_chip = ante
 pp = 10
 
 def Trials(chips):
-	games = 1
+	games = 0
 	for _ in range(trial):
 		# Cannot bet more than chips
 		if chips >= (ante + pp + bet_chip):

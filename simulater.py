@@ -12,8 +12,8 @@ bet_chip = ante
 pp = 10
 
 def Trials(chips):
+	games = 1
 	for _ in range(trial):
-
 		# Cannot bet more than chips
 		if chips >= (ante + pp + bet_chip):
 			deck = pokerapp.Deck()
@@ -51,14 +51,17 @@ def Trials(chips):
 
 			# For debug
 			#print(hand_result, match_result, chips, pays, ante_b, pp_b)
+			games += 1
+		else:
+			break
 
-	return chips
+	return chips, games
 
-def Wins():
+def Wins(games):
 	w = collections.Counter(match_list)
-	print('Player {} wins. ({:.1%})'.format(w[0], w[0] / trial))
-	print('Dealer {} wins. ({:.1%})'.format(w[1], w[1] / trial))
-	print('Draw {} times. ({:.1%})'.format(w[2], w[2] / trial))
+	print('Player {} wins. ({:.1%})'.format(w[0], w[0] / games))
+	print('Dealer {} wins. ({:.1%})'.format(w[1], w[1] / games))
+	print('Draw {} times. ({:.1%})'.format(w[2], w[2] / games))
 
 	return w[0]
 
@@ -91,15 +94,18 @@ def main():
 	print('The simulator trials {:,} times.'.format(trial))
 	print('You\'ll bet ante ${} and pair plus ${} all the time.'.format(ante, pp))
 
-	T = Trials(chip)
+	T, G = Trials(chip)
+
+	print()
+	print('You could play the game {:} times.'.format(G))
 
 	print('\n=== Probabliry of winning or losing ===\n')
 
-	W = Wins()
+	W = Wins(G)
 
 	print('\n=== Percentage of Players all hands ===\n')
 	
-	Hands(hand_list, trial)
+	Hands(hand_list, G)
 
 	print('\n=== Percentage of Players win({:,} times) hands ===\n'.format(W))
 	

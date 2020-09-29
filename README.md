@@ -138,35 +138,31 @@ Continue?: [y/n]
   - プレイヤーはfoldしない
 
 ```sh
-masashi@PC-ubuntu:~/Three-card-poker$ python3 simulater.py 
+$ python3 simulater.py 
 You are first given $1,000.
 Three card poker simulator start.
-The simulator trials 1,000 times.
+The simulator trials 100 times.
 You\'ll bet ante $10 and pair plus $10 all the time.
-
-You could play the game 301 times.
 
 === Probabliry of winning or losing ===
 
-Player 156 wins. (51.8%)
-Dealer 144 wins. (47.8%)
-Draw 1 times. (0.3%)
+Player 54 wins. (54.0%)
+Dealer 46 wins. (46.0%)
+Draw 0 times. (0.0%)
 
 === Percentage of Players all hands ===
 
-High card!          74.751%
-One Pair!           18.605%
-Flash!               4.319%
-Straight!            1.993%
-Straight Flash!      0.332%
+High card!            75.0%
+One Pair!             12.0%
+Flash!                 7.0%
+Straight!              6.0%
 
-=== Percentage of Players win(156 times) hands ===
+=== Percentage of Players win(54 times) hands ===
 
-High card!          59.615%
-One Pair!           27.564%
-Flash!               8.333%
-Straight!            3.846%
-Straight Flash!      0.641%
+High card!          61.111%
+One Pair!           16.667%
+Flash!              11.111%
+Straight!           11.111%
 
-You finally got $10
+You finally got $-470
 ```

@@ -15,8 +15,7 @@ def Trials(chips):
 	for _ in range(trial):
 
 		# Cannot bet more than chips
-		# Double the amount considering the amount of betting and reducing
-		if chips >= (ante + pp + bet_chip) * 2 :
+		if chips >= (ante + pp + bet_chip):
 			deck = pokerapp.Deck()
 			deck.shuffle()
 

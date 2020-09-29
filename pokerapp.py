@@ -181,8 +181,7 @@ def Liquidation(match, d_hand, ante, bet):
 		# Forfelt the bet
 		refund_bet = 0
 		refund_ante = 0
-		# Convert negative
-		return -((bet * 2) + ante)
+		return refund_bet + refund_ante
 
 	elif match == 2:
 		return 0

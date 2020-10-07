@@ -51,78 +51,78 @@ How much do you bet?: $10
 
 ===== Open Your Hand =====
 
-Your Hand: ['♠4', '♠9', '♠K'] ['Flash!']
+Your Hand: ['♡J', '♡10', '♡Q'] ['Straight Flash!']
 
 The same chips as Ante is required to match the dealer.
 Do you play in your hand?: [y/n]y
 
 ===== Open Dealer Hand =====
 
-Dealer Hand: ['♡2', '♣9', '♡4'] ["Less than Queen-high. Dealer can't play"]
-
-You WIN!
-
-===== Pay off =====
-
-Pay off $30 
-Pair plus bonus $50 
-Ante bonus $0 
-
-Your chips are $1050.
-Continue?: [y/n]y
-Your chips are $1050.
-Do you want to bet ante?: [y/n]y
-How much do you bet?: $10
-Do you want to bet Pair plus?: [y/n]y
-How much do you bet?: $10
-
-===== Open Your Hand =====
-
-Your Hand: ['♠7', '♣K', '♣3'] ['High card!']
-
-The same chips as Ante is required to match the dealer.
-Do you play in your hand?: [y/n]y
-
-===== Open Dealer Hand =====
-
-Dealer Hand: ['♠Q', '♡4', '♣5'] ['High card!']
+Dealer Hand: ['♢4', '♢J', '♢9'] ['Flash!']
 
 You WIN!
 
 ===== Pay off =====
 
 Pay off $40 
-Pair plus bonus $0 
-Ante bonus $0 
+Pair plus bonus $410 
+Ante bonus $50 
 
-Your chips are $1060.
+Your chips are $1470.
 Continue?: [y/n]y
-Your chips are $1060.
-Do you want to bet ante?: [y/n]y
-How much do you bet?: $10
+Your chips are $1470.
+Do you want to bet ante?: [y/n]y 
+How much do you bet?: $50
 Do you want to bet Pair plus?: [y/n]y
-How much do you bet?: $10
+How much do you bet?: $50
 
 ===== Open Your Hand =====
 
-Your Hand: ['♡9', '♢2', '♢3'] ['High card!']
+Your Hand: ['♣10', '♡6', '♢7'] ['High card!']
 
 The same chips as Ante is required to match the dealer.
 Do you play in your hand?: [y/n]y
 
 ===== Open Dealer Hand =====
 
-Dealer Hand: ['♢10', '♣2', '♢7'] ["Less than Queen-high. Dealer can't play"]
+Dealer Hand: ['♣3', '♡A', '♢3'] ['One Pair!']
+
+Dealer WIN!
+
+===== Pay off =====
+
+Pay off $0 
+Pair plus bonus $0 
+Ante bonus $0 
+
+Your chips are $1320.
+Continue?: [y/n]y
+Your chips are $1320.
+Do you want to bet ante?: [y/n]y
+How much do you bet?: $100
+Do you want to bet Pair plus?: [y/n]y
+How much do you bet?: $100
+
+===== Open Your Hand =====
+
+Your Hand: ['♢3', '♠4', '♠7'] ['High card!']
+
+The same chips as Ante is required to match the dealer.
+Do you play in your hand?: [y/n]y
+
+===== Open Dealer Hand =====
+
+Dealer Hand: ['♣9', '♡2', '♠3'] ["Less than Queen-high. Dealer can't play"]
 
 You WIN!
 
 ===== Pay off =====
 
-Pay off $30 
+Pay off $300 
 Pair plus bonus $0 
 Ante bonus $0 
 
-Your chips are $1060.
+Your chips are $1320.
 Continue?: [y/n]
 ```
 

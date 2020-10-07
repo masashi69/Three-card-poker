@@ -264,7 +264,7 @@ def main(chip):
 
 		else:
 
-			i = input('Do you play in your hand?: [y/n]')
+			i = input('Do you play in your hand? (Costs ${}): [y/n]'.format(bet_ante))
 
 			# Open dealer hand
 

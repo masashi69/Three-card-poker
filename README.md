@@ -51,41 +51,41 @@ How much do you bet?: $10
 
 ===== Open Your Hand =====
 
-Your Hand: ['♡J', '♡10', '♡Q'] ['Straight Flash!']
+Your Hand: ['♡8', '♢8', '♡K'] ['One Pair!']
 
 The same chips as Ante is required to match the dealer.
-Do you play in your hand?: [y/n]y
+Do you play in your hand? (Costs $10): [y/n]y
 
 ===== Open Dealer Hand =====
 
-Dealer Hand: ['♢4', '♢J', '♢9'] ['Flash!']
+Dealer Hand: ['♡9', '♢A', '♣K'] ['High card!']
 
 You WIN!
 
 ===== Pay off =====
 
 Pay off $40 
-Pair plus bonus $410 
-Ante bonus $50 
+Pair plus bonus $20 
+Ante bonus $0 
 
-Your chips are $1470.
+Your chips are $1030.
 Continue?: [y/n]y
-Your chips are $1470.
-Do you want to bet ante?: [y/n]y 
+Your chips are $1030.
+Do you want to bet ante?: [y/n]y
 How much do you bet?: $50
 Do you want to bet Pair plus?: [y/n]y
 How much do you bet?: $50
 
 ===== Open Your Hand =====
 
-Your Hand: ['♣10', '♡6', '♢7'] ['High card!']
+Your Hand: ['♠5', '♠4', '♢2'] ['High card!']
 
 The same chips as Ante is required to match the dealer.
-Do you play in your hand?: [y/n]y
+Do you play in your hand? (Costs $50): [y/n]y
 
 ===== Open Dealer Hand =====
 
-Dealer Hand: ['♣3', '♡A', '♢3'] ['One Pair!']
+Dealer Hand: ['♣9', '♡9', '♡5'] ['One Pair!']
 
 Dealer WIN!
 
@@ -95,9 +95,9 @@ Pay off $0
 Pair plus bonus $0 
 Ante bonus $0 
 
-Your chips are $1320.
+Your chips are $880.
 Continue?: [y/n]y
-Your chips are $1320.
+Your chips are $880.
 Do you want to bet ante?: [y/n]y
 How much do you bet?: $100
 Do you want to bet Pair plus?: [y/n]y
@@ -105,14 +105,14 @@ How much do you bet?: $100
 
 ===== Open Your Hand =====
 
-Your Hand: ['♢3', '♠4', '♠7'] ['High card!']
+Your Hand: ['♡K', '♣4', '♢9'] ['High card!']
 
 The same chips as Ante is required to match the dealer.
-Do you play in your hand?: [y/n]y
+Do you play in your hand? (Costs $100): [y/n]y
 
 ===== Open Dealer Hand =====
 
-Dealer Hand: ['♣9', '♡2', '♠3'] ["Less than Queen-high. Dealer can't play"]
+Dealer Hand: ['♡6', '♣8', '♠J'] ["Less than Queen-high. Dealer can't play"]
 
 You WIN!
 
@@ -122,7 +122,7 @@ Pay off $300
 Pair plus bonus $0 
 Ante bonus $0 
 
-Your chips are $1320.
+Your chips are $880.
 Continue?: [y/n]
 ```
 

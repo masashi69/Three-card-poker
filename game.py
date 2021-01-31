@@ -9,6 +9,7 @@ pygame.display.set_caption('Three card poker')
 
 GREEN = (0, 127, 0)
 
+# Use the hand list as it is as a key
 card_images = {'♠2': 'src/2_of_spades.png', '♠3': 'src/3_of_spades.png',
 			   '♠4': 'src/4_of_spades.png', '♠5': 'src/5_of_spades.png',
 			   '♠6': 'src/6_of_spades.png', '♠7': 'src/7_of_spades.png',
@@ -43,22 +44,67 @@ deck = pokerapp.Deck()
 deck.shuffle()
 
 player_hand = pokerapp.Handout(deck)
+dealer_hand = pokerapp.Handout(deck)
 
-ace1 = pygame.image.load(card_images[player_hand[0]])
-ace2 = pygame.image.load(card_images[player_hand[1]])
-ace3 = pygame.image.load(card_images[player_hand[2]])
-card1 = pygame.transform.scale(ace1, (width, height))
-card2 = pygame.transform.scale(ace2, (width, height))
-card3 = pygame.transform.scale(ace3, (width, height))
+p_handcheck = pokerapp.Handcheck(player_hand).result()
+d_handcheck = pokerapp.Handcheck(dealer_hand, flag=True).result()
+
+p_role = pokerapp.Handcheck(player_hand).get_role()
+d_role = pokerapp.Handcheck(dealer_hand, flag=True).get_role()
+
+def Matchcheck():
+	match_result = pokerapp.Match(p_handcheck, d_handcheck)
+
+	if match_result == 0:
+		return 'You WIN!'
+
+	elif match_result == 1:
+		return 'Dealer WIN!'
+
+	elif match_result == 2:
+		return 'Draw!'
+
+winner = Matchcheck()
+
+font = pygame.font.Font(None, 20)
+winner_text = font.render(winner, True, (255,255,255))
+p_role_text = font.render('Player hand: ' + p_role[0][0], True, (255,255,255))
+d_role_text = font.render('Dealer hand: ' + d_role[0][0], True, (255,255,255))
+
+img1 = pygame.image.load(card_images[player_hand[0]])
+img2 = pygame.image.load(card_images[player_hand[1]])
+img3 = pygame.image.load(card_images[player_hand[2]])
+img4 = pygame.image.load(card_images[dealer_hand[0]])
+img5 = pygame.image.load(card_images[dealer_hand[1]])
+img6 = pygame.image.load(card_images[dealer_hand[2]])
+
+# Resize card image
+p_card1 = pygame.transform.scale(img1, (width, height))
+p_card2 = pygame.transform.scale(img2, (width, height))
+p_card3 = pygame.transform.scale(img3, (width, height))
+d_card1 = pygame.transform.scale(img4, (width, height))
+d_card2 = pygame.transform.scale(img5, (width, height))
+d_card3 = pygame.transform.scale(img6, (width, height))
+
+
 
 while True:
 
 	DISPLAYSURF.fill(GREEN)
 
 	x, y = 10, 10
-	DISPLAYSURF.blit(card1, (x,y))
-	DISPLAYSURF.blit(card2, (x + width,y))
-	DISPLAYSURF.blit(card3, (x + width * 2,y))
+	# Player hand
+	DISPLAYSURF.blit(p_card1, (x,y))
+	DISPLAYSURF.blit(p_card2, (x + width,y))
+	DISPLAYSURF.blit(p_card3, (x + width * 2,y))
+	# Dealer hand
+	DISPLAYSURF.blit(d_card1, (x,y + height))
+	DISPLAYSURF.blit(d_card2, (x + width,y + height))
+	DISPLAYSURF.blit(d_card3, (x + width * 2,y + height))
+
+	DISPLAYSURF.blit(p_role_text, (400, 260))
+	DISPLAYSURF.blit(d_role_text, (400, 280))
+	DISPLAYSURF.blit(winner_text, (400, 300))
 
 	for event in pygame.event.get():
 		if event.type == QUIT:
